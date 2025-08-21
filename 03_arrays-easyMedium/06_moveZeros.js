@@ -12,7 +12,7 @@ let nums = [0, 1, 0, 3, 12];
 var moveZeroes = function (nums) {
   let numsLength = nums.length;
   if (numsLength <= 1) {
-    return numsLength;
+    return nums;
   }
   let position = 0;
   let temp = 0;
