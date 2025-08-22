@@ -7,15 +7,26 @@
 
 let nums = [3, 0, 1];
 
+// var missingNumber = function (nums) {
+//   let ans = 0;
+//   let numsLength = nums.length;
+//   for (let i = 0; i <= numsLength; i = i + 1) {
+//     ans = ans ^ i;
+//   }
+//   for (let i = 0; i < numsLength; i = i + 1) {
+//     ans = ans ^ nums[i];
+//   }
+//   return ans;
+// };
+
+//* OR
 var missingNumber = function (nums) {
   let ans = 0;
   let numsLength = nums.length;
-  for (let i = 0; i <= numsLength; i = i + 1) {
-    ans = ans ^ i;
-  }
   for (let i = 0; i < numsLength; i = i + 1) {
-    ans = ans ^ nums[i];
+    ans = ans ^ nums[i] ^ i;
   }
+  ans = ans ^ numsLength;
   return ans;
 };
 
