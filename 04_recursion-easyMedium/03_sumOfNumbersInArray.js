@@ -22,7 +22,7 @@ function calculateOdd(n) {
   }
 
   // recursive part
-  return isOdd ? arr[n] + calculateOdd(n - 1) : calculateOdd(n - 1);
+  return (isOdd ? arr[n] : 0) + calculateOdd(n - 1);
 }
 
 console.log(calculateOdd(arr.length - 1));
