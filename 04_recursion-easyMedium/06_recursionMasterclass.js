@@ -23,7 +23,7 @@
 // console.log(fib(5));
 
 //? Time Complexity = O(2^n)
-//? Space Complexity = O(1)
+//? Space Complexity = O(n)
 
 //* So bad time complexity. We have two options to improve it.
 //* 1: Memoization
@@ -54,4 +54,4 @@ var fib = (function () {
 console.log(fib(5));
 
 //? Time Complexity = O(n)
-//? Space Complexity = O(1)
+//? Space Complexity = O(n)
