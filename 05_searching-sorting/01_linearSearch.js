@@ -12,3 +12,6 @@ function linearSearch(arr, target) {
 }
 
 console.log(linearSearch(arr, target));
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(1)
