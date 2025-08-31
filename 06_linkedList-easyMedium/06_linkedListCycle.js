@@ -56,5 +56,5 @@ var hasCycle = function (head) {
   return false;
 };
 
-//? Time Complexity: O(n/2) + O(n/2) + O(n/2) => O(n)
+//? Time Complexity: O(n)
 //? Space Complexity: O(1)
