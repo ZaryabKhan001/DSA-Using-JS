@@ -29,3 +29,32 @@ var hasCycle = function (head) {
   }
   return false;
 };
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(n)
+
+//* If we have to solve it using O(1) space complexity?
+
+//? Approach 2:
+//*Use Floyd’s Cycle Detection (also called the Tortoise and Hare algorithm).
+// Use two pointers: slow moves one step, fast moves two steps.
+// If there is a cycle, they will eventually meet. If fast or fast.next becomes null, there’s no cycle.
+
+var hasCycle = function (head) {
+  if (head === null) {
+    return false;
+  }
+  let slow = head;
+  let fast = head.next;
+  while (fast !== null && fast.next !== null) {
+    if (slow === fast) {
+      return true;
+    }
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return false;
+};
+
+//? Time Complexity: O(n/2) + O(n/2) + O(n/2) => O(n)
+//? Space Complexity: O(1)
