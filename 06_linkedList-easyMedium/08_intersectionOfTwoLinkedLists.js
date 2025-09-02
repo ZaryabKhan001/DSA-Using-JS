@@ -24,3 +24,20 @@ var getIntersectionNode = function (headA, headB) {
 
 //? Time Complexity: O(m+n)
 //? Space Complexity: O(m)
+
+//* To solve this in O(1) space complexity.
+
+//? Better Approach
+var getIntersectionNode = function (headA, headB) {
+  let listA = headA;
+  let listB = headB;
+
+  while (listA !== listB) {
+    listA = listA ? listA.next : headB;
+    listB = listB ? listB.next : headA;
+  }
+  return listA;
+};
+
+//? Time Complexity: O(m+n)
+//? Space Complexity: O(1)
