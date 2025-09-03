@@ -15,7 +15,7 @@
 // Input: head = [1,2], n = 1
 // Output: [1]
 
-//? Approach 01:
+//? Approach 01: (Two Pass)
 // Use a sentinel (dummy) node before the head to simplify edge cases.
 // First, calculate the total length of the list.
 // Find the previous node of the one to be deleted using the length – n formula.
@@ -38,6 +38,34 @@ var removeNthFromEnd = function (head, n) {
     prev = prev.next;
   }
   prev.next = prev.next.next;
+  return sentinel.next;
+};
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(1)
+
+//? Approach 02: (One Pass)
+// Use a dummy node before the head to handle edge cases easily.
+// Move the first pointer n steps ahead.
+// Move both first and second pointers until first reaches the end.
+// Now second is just before the node to be deleted. Skip it using second.next = second.next.next
+
+var removeNthFromEnd = function (head, n) {
+  let sentinel = new ListNode();
+  sentinel.next = head;
+
+  let first = head;
+  let second = sentinel;
+
+  for (let i = 1; first.next != null; i = i + 1) {
+    if (i < n) {
+      first = first.next;
+    } else {
+      first = first.next;
+      second = second.next;
+    }
+  }
+  second.next = second.next.next;
   return sentinel.next;
 };
 
