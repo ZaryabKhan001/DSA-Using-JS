@@ -19,6 +19,11 @@
 // Input: head = [1,2,3]
 // Output: [2,1,3]
 
+//? Approach
+// Use a dummy node before the head to handle edge cases easily.
+// Use pointers to swap pairs by rewiring node connections.
+// Iterate through the list two nodes at a time and swap them.
+
 var swapPairs = function (head) {
   if (!head || !head.next) return head;
   let f = head;
