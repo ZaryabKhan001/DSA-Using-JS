@@ -41,3 +41,25 @@ var lengthOfLastWord = function (s) {
 
 //? Time Complexity: O(n)
 //? Space Complexity: O(1)
+
+//? Approach 02:
+// Start from the end and skip trailing spaces.
+// Count characters until the next space or beginning of string.
+// This gives the length of the last word efficiently.
+
+var lengthOfLastWord = function (s) {
+  let i = s.length - 1;
+  let count = 0;
+  while (i >= 0) {
+    if (s[i] === " " && count != 0) {
+      break;
+    } else if (s[i] !== " ") {
+      count = count + 1;
+    }
+    i = i - 1;
+  }
+  return count;
+};
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(1)
