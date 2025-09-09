@@ -22,12 +22,10 @@
 // Output: 1
 // Explanation: s can be split into "LLLLRRRR".
 
-//? Approach
-// Start from the end of the string.
-// Skip any trailing spaces.
-// Once a non-space character is found, start counting characters.
-// Stop counting when a space is found after starting the count.
-// Return the total count.
+//? Approach 1:
+// use l and r pointers to calculate L and R.
+// wen both becomes equal it means now we have balance string
+// simple update count and return at last
 
 var balancedStringSplit = function (s) {
   let l = 0;
@@ -43,6 +41,30 @@ var balancedStringSplit = function (s) {
       count = count + 1;
       l = 0;
       r = 0;
+    }
+  }
+  return count;
+};
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(1)
+
+//? Approach 2:
+// use temp pointer, traverse s
+// increment it when found L, and decrement it when found R
+// when temp becomes zero, it means we have got the balanced string
+
+var balancedStringSplit = function (s) {
+  let temp = 0;
+  let count = 0;
+  for (let i = 0; i < s.length; i = i + 1) {
+    if (s[i] === "L") {
+      temp++;
+    } else {
+      temp--;
+    }
+    if (temp === 0) {
+      count = count + 1;
     }
   }
   return count;
