@@ -27,7 +27,44 @@
 // There are no consonants in s. Hence, maximum consonant frequency = 0.
 // The output is 3 + 0 = 3
 
-//? Approach:
+//? Approach 1
+// Initialize a character frequency map using a loop.
+// Define a list of vowels: ['a', 'e', 'i', 'o', 'u'].
+// Traverse the string and count how often each character appears.
+// Track the highest frequency vowel and the highest frequency consonant.
+// Return the sum of those two highest values.
+
+var maxFreqSum = function (s) {
+  let map = {};
+  for (i = 0; i < s.length; i++) {
+    if (!map[s[i]]) {
+      map[s[i]] = 1;
+    } else {
+      ++map[s[i]];
+    }
+  }
+
+  let vowels = ["a", "e", "i", "o", "u"];
+  let maxVowels = 0;
+  let maxConsonant = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (vowels.includes(s[i])) {
+      if (map[s[i]] > maxVowels) {
+        maxVowels = map[s[i]];
+      }
+    } else {
+      if (map[s[i]] > maxConsonant) {
+        maxConsonant = map[s[i]];
+      }
+    }
+  }
+  return maxConsonant + maxVowels;
+};
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(1) because our input is a-z only 26 maximum.
+
+//? Approach 2:
 // We loop through the string and count how many times each character appears, separating vowels and consonants into two hash maps.
 // While counting, we track the maximum frequency seen among vowels and consonants.
 // Finally, we return the sum of the most frequent vowel count and the most frequent consonant count.
