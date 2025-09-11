@@ -44,3 +44,32 @@ var isPalindrome = function (s) {
 
 //? Time Complexity: O(n)
 //? Space Complexity: O(n)
+
+//? Approach 02:
+// We use two pointers (`p1` from start, `p2` from end) to compare characters.
+// If a character is not alphanumeric, we skip it and move the respective pointer.
+// If characters differ (ignoring case), return false; otherwise continue until pointers meet, then return true.
+
+var isPalindrome = function (s) {
+  let length = s.length;
+  let p1 = 0;
+  let p2 = length - 1;
+  while (p2 > p1) {
+    if (!s[p1].match(/[a-zA-Z0-9]/)) {
+      p1++;
+    } else if (!s[p2].match(/[a-zA-Z0-9]/)) {
+      p2--;
+    } else {
+      if (s[p1].toLowerCase() !== s[p2].toLowerCase()) {
+        return false;
+      } else {
+        p1++;
+        p2--;
+      }
+    }
+  }
+  return true;
+};
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(1)
