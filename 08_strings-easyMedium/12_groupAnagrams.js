@@ -45,3 +45,41 @@ var groupAnagrams = function (strs) {
 
 //? Time Complexity: O(n·k·log k), where n is the number of strings and k is the average length of each string (due to sorting)
 //? Space Complexity: O(n·k), for storing grouped anagrams
+
+//? Approach 2:
+// Initialize a hashmap to store grouped anagrams.
+// For each word in the input array:
+// Create an array of size 26 to count frequency of each letter.
+// Convert that frequency array into a unique string key (like “#1#0#2…”).
+// Use this string as a hash key to group anagrams.
+// Return all the grouped values.
+
+var groupAnagrams = function (strs) {
+  let map = {};
+
+  for (let i = 0; i < strs.length; i++) {
+    let freqArr = Array(26).fill(0);
+    let s = strs[i];
+
+    for (let j = 0; j < s.length; j++) {
+      let index = s[j].charCodeAt(0) - "a".charCodeAt(0);
+      freqArr[index]++;
+    }
+
+    let key = "";
+    for (let k = 0; k < 26; k++) {
+      key += "#" + freqArr[k];
+    }
+
+    if (!map[key]) {
+      map[key] = [s];
+    } else {
+      map[key].push(s);
+    }
+  }
+
+  return Object.values(map);
+};
+
+//? Time Complexity: O(n·k), where n = number of strings, k = average length of strings (no sorting)
+//? Space Complexity: O(n·k), for storing frequency map and result
