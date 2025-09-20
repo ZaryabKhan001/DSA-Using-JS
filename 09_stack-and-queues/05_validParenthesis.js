@@ -28,49 +28,33 @@
 // Output: false
 
 //? Approach:
-// Use two stacks:
-// s1 for pushing new elements (input stack).
-// s2 for popping/peeking elements in correct FIFO order (output stack).
-// push(x):Simply push element x into s1.
-// pop():
-// If s2 is empty, transfer all elements from s1 to s2 (reverse order).
-// Then pop from s2.
-// peek():
-// If s2 is empty, transfer all elements from s1 to s2.
-// Return the top of s2.
-// empty(): Return true if both s1 and s2 are empty.
+// We use a stack to keep track of opening brackets.
+// When we encounter a closing bracket, we check if it correctly matches the top element of the stack.
+// If all brackets match and the stack is empty at the end, the string is valid.
 
-var MyQueue = function () {
-  this.s1 = [];
-  this.s2 = [];
-};
-MyQueue.prototype.push = function (x) {
-  this.s1.push(x);
-};
-MyQueue.prototype.pop = function () {
-  if (this.s2.length === 0) {
-    while (this.s1.length) {
-      this.s2.push(this.s1.pop());
+var isValid = function (s) {
+  let stack = [];
+  let map = {
+    "(": ")",
+    "{": "}",
+    "[": "]",
+  };
+  for (let i = 0; i < s.length; i = i + 1) {
+    if (map[s[i]]) {
+      stack.push(s[i]);
+    } else {
+      let top = stack[stack.length - 1];
+      if (stack.length === 0) {
+        return false;
+      } else if (map[top] === s[i]) {
+        stack.pop();
+      } else {
+        return false;
+      }
     }
   }
-  return this.s2.pop();
-};
-MyQueue.prototype.peek = function () {
-  if (this.s2.length === 0) {
-    while (this.s1.length) {
-      this.s2.push(this.s1.pop());
-    }
-  }
-  return this.s2[this.s2.length - 1];
-};
-MyQueue.prototype.empty = function () {
-  return this.s1.length === 0 && this.s2.length === 0;
+  return stack.length === 0;
 };
 
-//? Time Complexity:
-// push → O(1)
-// pop → O(n)
-// peek → O(n)
-// empty → O(1)
-
-//? Space Complexity = O(n)
+//? Time Complexity: O(n)
+//? Space Complexity: O(n)
