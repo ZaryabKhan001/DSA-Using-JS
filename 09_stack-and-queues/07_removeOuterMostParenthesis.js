@@ -31,7 +31,7 @@
 // The input string is "()()", with primitive decomposition "()" + "()".
 // After removing outer parentheses of each part, this is "" + "" = "".
 
-//? Approach 1:
+//? Approach 1: (With Stack)
 // Initialize:
 // stack to track open parentheses.
 // ans to build the final string without outer parentheses.
@@ -65,3 +65,32 @@ var removeOuterParentheses = function (s) {
 
 //? Time Complexity: O(n)
 //? Space Complexity: O(n)
+
+//? Approach 2 (Without Stack)
+// Initialize: a counter level to -1 and an empty string ans.
+// Traverse each character of the string s.
+// If the character is '('
+// Increment level.
+// If level is not 0, append '(' to ans.
+// If the character is ')'
+// If level is not 0, append ')' to ans.
+// Then decrement level.
+// Return the final ans string.
+
+var removeOuterParentheses = function (s) {
+  let level = -1;
+  let ans = "";
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "(") {
+      ++level;
+      ans += level ? s[i] : "";
+    } else {
+      ans += level ? s[i] : "";
+      --level;
+    }
+  }
+  return ans;
+};
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(1)
