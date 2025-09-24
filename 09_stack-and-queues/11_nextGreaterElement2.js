@@ -53,3 +53,40 @@ var nextGreaterElements = function (nums) {
 
 //? Time Complexity: O(n)
 //? Space Complexity: O(n)
+
+//? Approach 2:
+// Initialize:
+// n = arr.length
+// ans = Array(n).fill(-1) → To store result.
+// stack = [] → To keep track of next greater candidates.
+// Push last element into stack (start from end).
+// Traverse from (2n - 2) to 0:
+// Use i % n to simulate circular behavior.
+// While stack is not empty:
+// If current element < top of stack → that is the next greater, store it in ans[i % n] and break.
+// Else pop the stack (since it’s not greater).
+// Push current element (arr[i % n]) onto the stack.
+// Return ans
+
+var nextGreaterElements = function (arr) {
+  let n = arr.length;
+  let stack = [];
+  let ans = Array(n).fill(-1);
+  stack.push(arr[n - 1]);
+  for (let i = 2 * n - 2; i >= 0; i--) {
+    while (stack.length) {
+      let top = stack[stack.length - 1];
+      if (arr[i % n] < top) {
+        ans[i % n] = top;
+        break;
+      } else {
+        stack.pop();
+      }
+    }
+    stack.push(arr[i % n]);
+  }
+  return ans.slice(0, n);
+};
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(n)
