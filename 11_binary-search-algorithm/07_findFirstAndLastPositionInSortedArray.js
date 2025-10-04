@@ -47,5 +47,41 @@ var searchRange = function (arr, target) {
   return ans;
 };
 
+//? Approach 2:
+// Binary search for the **first index** (on match, shift right side).
+// Binary search for the **last index** (on match, shift left side).
+// Update ans[0] and ans[1] accordingly.
+
+var searchRange = function (arr, target) {
+  let l = 0;
+  let r = arr.length - 1;
+  let ans = [-1, -1];
+  while (l <= r) {
+    let m = l + Math.floor((r - l) / 2);
+    if (arr[m] === target) {
+      ans[0] = m;
+      r = m - 1;
+    } else if (arr[m] < target) {
+      l = m + 1;
+    } else {
+      r = m - 1;
+    }
+  }
+  l = 0;
+  r = arr.length - 1;
+  while (l <= r) {
+    let m = l + Math.floor((r - l) / 2);
+    if (arr[m] === target) {
+      ans[1] = m;
+      l = m + 1;
+    } else if (arr[m] < target) {
+      l = m + 1;
+    } else {
+      r = m - 1;
+    }
+  }
+  return ans;
+};
+
 //? Time Complexity: O(logn)
 //? Space Complexity: O(1)
