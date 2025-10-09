@@ -39,3 +39,28 @@ var twoSum = function (nums, target) {
 
 //? Time Complexity = O(n2)
 //? Space Complexity = O(1)
+
+//? Approach 2:
+// Store all elements with their indices in a map (map[nums[i]] = i).
+// Iterate through the array again to find the complement (target - nums[i]).
+// Check if the complement exists in the map and is not the same index.
+// Return the pair of indices [i, map[complement]] as the result.
+
+var twoSum = function (nums, target) {
+  let n = nums.length;
+  let map = {};
+
+  for (let i = 0; i < n; i++) {
+    map[nums[i]] = i;
+  }
+
+  for (let i = 0; i < n; i++) {
+    let pairToFind = target - nums[i];
+    if (pairToFind in map && map[pairToFind] !== i) {
+      return [i, map[pairToFind]];
+    }
+  }
+};
+
+//? Time Complexity = O(n)
+//? Space Complexity = O(n)
