@@ -36,3 +36,40 @@ var preorderTraversal = function (root) {
 
 //? Time Complexity = O(n)
 //? Space Complexity = O(n)
+
+//? LeetCode #94
+//? Binary Tree Inorder Traversal
+
+// Given the root of a binary tree, return the inorder traversal of its nodes' values.
+
+//? Example 1:
+// Input: root = [1,null,2,3]
+// Output: [1,2,3]
+
+//? Example 2:
+// Input: root = [1,2,3,4,5,null,8,null,null,6,7,9]
+// Output: [1,2,4,5,6,7,3,8,9]
+
+//? Approach
+// Use recursion to traverse the binary tree in inorder way:
+// First, visit the left subtree.
+// Then, add the current node’s value.
+// Finally, visit the right subtree.
+// Store the result in an array and return it.
+
+var inorderTraversal = function (root) {
+  let ans = [];
+
+  function traversal(curr) {
+    if (!curr) return;
+    traversal(curr.left);
+    ans.push(curr.val);
+    traversal(curr.right);
+  }
+  traversal(root);
+
+  return ans;
+};
+
+//? Time Complexity = O(n)
+//? Space Complexity = O(n)
