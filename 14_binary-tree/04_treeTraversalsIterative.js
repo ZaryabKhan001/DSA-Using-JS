@@ -35,3 +35,46 @@ var preorderTraversal = function (root) {
 
 //? Time Complexity = O(n)
 //? Space Complexity = O(n)
+
+//? LeetCode #94
+//? Binary Tree Inorder Traversal
+
+// Given the root of a binary tree, return the inorder traversal of its nodes' values.
+
+//? Example 1:
+// Input: root = [1,null,2,3]
+// Output: [1,2,3]
+
+//? Example 2:
+// Input: root = [1,2,3,4,5,null,8,null,null,6,7,9]
+// Output: [1,2,4,5,6,7,3,8,9]
+
+//? Approach
+// Initialize
+// An empty stack to simulate recursion.
+// A pointer curr starting at root.
+// Traverse Left: Keep pushing nodes to the stack while moving to the left child.
+// Visit Node:
+// When no more left nodes, pop from the stack.
+// Add the node’s value to the result array ans.
+// Traverse Right: Move curr to the right child and repeat.
+
+var inorderTraversal = function (root) {
+  let ans = [];
+  let stack = [];
+  let curr = root;
+
+  while (curr || stack.length) {
+    while (curr) {
+      stack.push(curr);
+      curr = curr.left;
+    }
+    curr = stack.pop();
+    ans.push(curr.val);
+    curr = curr.right;
+  }
+  return ans;
+};
+
+//? Time Complexity = O(n)
+//? Space Complexity = O(n)
