@@ -113,3 +113,36 @@ var postorderTraversal = function (root) {
 
 //? Time Complexity = O(n)
 //? Space Complexity = O(n)
+
+//? Approach 2
+// Use a stack to simulate recursion.
+// Traverse left subtree first, pushing nodes into the stack.
+// Peek top node:
+// If it has a right child not yet visited, traverse right subtree.
+// Else, process the node (postorder: left → right → root).
+// Track the last visited node to avoid revisiting right subtrees.
+// Continue until all nodes are processed.
+
+var postorderTraversal = function (root) {
+  let stack = [];
+  let curr = root;
+  let ans = [];
+  let lastVisited = null;
+  while (curr || stack.length) {
+    while (curr) {
+      stack.push(curr);
+      curr = curr.left;
+    }
+    let peek = stack[stack.length - 1];
+    if (peek.right && peek.right != lastVisited) {
+      curr = peek.right;
+    } else {
+      ans.push(peek.val);
+      lastVisited = stack.pop();
+    }
+  }
+  return ans;
+};
+
+//? Time Complexity = O(n)
+//? Space Complexity = O(h) where: h where, h is the height of the tree.
