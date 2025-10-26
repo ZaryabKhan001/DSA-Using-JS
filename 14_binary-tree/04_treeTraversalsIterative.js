@@ -78,3 +78,38 @@ var inorderTraversal = function (root) {
 
 //? Time Complexity = O(n)
 //? Space Complexity = O(n)
+
+//? LeetCode #145
+//? Binary Tree Postorder Traversal
+
+// Given the root of a binary tree, return the postorder traversal of its nodes' values.
+
+//? Example 1:
+// Input: root = [1,null,2,3]
+// Output: [1,2,3]
+
+//? Example 2:
+// Input: root = [1,2,3,4,5,null,8,null,null,6,7,9]
+// Output: [1,2,4,5,6,7,3,8,9]
+
+//? Approach 1:
+// Use two stacks — `stack1` for traversal, `stack2` to store nodes in reverse postorder.
+// Pop a node from `stack1`, push it into `stack2`.
+// Push its left and right children into `stack1`.
+// Reverse `stack2` to get the final postorder (left → right → root).
+
+var postorderTraversal = function (root) {
+  if (!root) return [];
+  let stack1 = [root];
+  let stack2 = [];
+  while (stack1.length) {
+    let curr = stack1.pop();
+    stack2.push(curr);
+    curr.left && stack1.push(curr.left);
+    curr.right && stack1.push(curr.right);
+  }
+  return stack2.reverse().map((node) => node.val);
+};
+
+//? Time Complexity = O(n)
+//? Space Complexity = O(n)
