@@ -15,7 +15,7 @@
 // Input: root = []
 // Output: []
 
-//? Approach
+//? Approach Iterative:
 // 1. If the root is `null`, return an empty array.
 // 2. Initialize a queue with the root node and an empty array `ans` to store results.
 // 3. While the queue is not empty:
@@ -41,6 +41,28 @@ var levelOrder = function (root) {
     }
     ans.push(levelArr);
   }
+  return ans;
+};
+
+//? Time Complexity = O(n)
+//? Space Complexity = O(n)
+
+//? Approach Recursive:
+
+var levelOrder = function (root) {
+  if (!root) return [];
+  let ans = [];
+
+  function traversal(curr, level) {
+    if (!ans[level]) {
+      ans[level] = [];
+    }
+    ans[level].push(curr.val);
+    curr.left && traversal(curr.left, level + 1);
+    curr.right && traversal(curr.right, level + 1);
+  }
+  traversal(root, 0);
+
   return ans;
 };
 
