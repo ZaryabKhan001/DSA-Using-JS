@@ -37,3 +37,30 @@ var isSymmetric = function (root) {
 
 //? Time Complexity = O(n)
 //? Space Complexity = O(n)
+
+//? Approach (Iterative):
+
+// Use a helper function isMirror(left, right) to compare two nodes.
+// The tree is symmetric if:
+// Both left and right subtrees are null → return true.
+// Only one is null → return false.
+// Their values match and:
+// Left’s left subtree mirrors Right’s right subtree.
+// Left’s right subtree mirrors Right’s left subtree.
+// Start the comparison with root.left and root.right.
+
+var isSymmetric = function (root) {
+  let q = [root.left, root.right];
+  while (q.length) {
+    let p1 = q.shift();
+    let p2 = q.shift();
+    if (!p1 && !p2) continue;
+    if (!p1 || !p2) return false;
+    if (p1.val != p2.val) return false;
+    q.push(p1.left, p2.right);
+    q.push(p1.right, p2.left);
+  }
+  return true;
+};
+//? Time Complexity = O(n)
+//? Space Complexity = O(n)
