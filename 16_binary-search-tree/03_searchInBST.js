@@ -34,3 +34,16 @@ var searchBST = function (root, val) {
 
 //? Time Complexity: O(n)
 //? Space Complexity: O(n)
+
+//? Approach 02: Bottom-Up
+
+var searchBST = function (root, val) {
+  if (!root || root.val === val) return root;
+
+  return val > root.val
+    ? searchBST(root.right, val)
+    : searchBST(root.left, val);
+};
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(n)
