@@ -64,3 +64,49 @@ function heapifyDown(arr, i, n) {
 
 const sortedArray = heapSort(arr);
 console.log(sortedArray);
+
+//? Time and Space Complexity of Heap Sort
+
+//? Space Complexity: O(1)
+
+//? Time Complexity: (HeapifyDown) O(logn)
+
+// Creating a maxHeap out of an array
+// Total nodes: n
+
+// Leaf nodes: n/2
+
+// For leaf nodes, we have to do zero operations.
+
+// Create a maxHeap out of array Time Complexity: O(n)
+
+// Time Complexity = O(n) + O(nlogn)
+
+//? Total: O(nlogn)
+
+//? Time Comparison with Other Sorts
+
+// | Algorithm      | Best Case Time | Average Case Time | Worst Case Time | Space Complexity | Stable?
+
+// | Bubble Sort    | O(n)           | O(n²)             | O(n²)           | O(1)             | ✔ Yes    |
+// | Insertion Sort | O(n)           | O(n²)             | O(n²)           | O(1)             | ✔ Yes    |
+// | Merge Sort     | O(n log n)     | O(n log n)        | O(n log n)      | O(n)             | ✔ Yes    |
+// | Heap Sort      | O(n log n)     | O(n log n)        | O(n log n)      | O(1)             | ✘ No     |
+// | Quick Sort     | O(n log n)     | O(n log n)        | O(n²)           | O(log n)         | ✘ No     |
+
+//? Stable Sorting Algorithm
+// Sort the array by ‘age’
+
+//             [
+//                 {name: Rahul, age: 20},
+//                 {name: Akshay, age: 18},
+//                 {name: Simran. age: 18},
+//                 {name: Sachin, age: 30}
+//             ]
+
+// Sorted Array: [{Sachin}, {Rahul}, {Akshay}, {Simran}] (sorted in decreasing order)
+
+//? Stable Algorithm: This algorithm ensures that the same value element maintain’s relative order.
+
+//? .Sort in JavaScript
+// It ensures stable sorting.
