@@ -23,8 +23,11 @@
 
 var findKthLargest = function (nums, k) {
   let pq = new MinPriorityQueue();
-  for (let i = 0; i < k; i = i + 1) {
-    pq.dequeue();
+  for (let i = 0; i < nums.length; i = i + 1) {
+    pq.enqueue(nums[i]);
+    if (pq.size() > k) {
+      pq.dequeue();
+    }
   }
   return pq.front();
 };
