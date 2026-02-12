@@ -20,7 +20,7 @@
 // Explanation: You can allocate to the first, second and third child with 1, 2, 1 candies respectively.
 // The third child gets 1 candy because it satisfies the above two conditions.
 
-//? Approach:
+//? Approach 01:
 // Left-to-right pass → If a child has a higher rating than the left neighbor, give them more candies than the neighbor.
 // Right-to-left pass → If a child has a higher rating than the right neighbor, give them more candies than the neighbor.
 // Final answer → For each child, take the maximum candies required from both passes and sum them up.
@@ -56,3 +56,41 @@ var candy = function (arr) {
 
 //? Time Complexity: O(n)
 //? Space Complexity: O(n)
+
+//? Approach 02:
+// Every child must get at least 1 candy → start with ans = n.
+// Traverse the ratings array and look for increasing and decreasing slopes.
+// Increasing slope (up): When arr[i] > arr[i-1], keep incrementing up. Add candies accordingly.
+// Decreasing slope (down): When arr[i] < arr[i-1], keep incrementing down. Add candies accordingly.
+// To avoid double-counting the peak (where up and down meet), subtract Math.min(up, down).
+// Continue until the end and return ans.
+
+var candy = function (arr) {
+  let n = arr.length;
+  let ans = n;
+  let i = 1;
+
+  while (i < n) {
+    if (arr[i] === arr[i - 1]) {
+      ++i;
+      continue;
+    }
+    let up = 0;
+    while (i < n && arr[i] > arr[i - 1]) {
+      ++up;
+      ans = ans + up;
+      ++i;
+    }
+    let down = 0;
+    while (i < n && arr[i] < arr[i - 1]) {
+      ++down;
+      ans += down;
+      ++i;
+    }
+    ans = ans - Math.min(up, down);
+  }
+  return ans;
+};
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(1)
