@@ -20,7 +20,7 @@
 // 2. 1 step + 2 steps
 // 3. 2 steps + 1 step
 
-//? Approach 1:
+//? Approach 01:
 //? Bottom Up
 var climbStairs = function(n) {
     let dp = [0, 1, 2];
@@ -34,7 +34,7 @@ var climbStairs = function(n) {
 //? Space Complexity: O(n)
 
 
-//? Approach 2: /
+//? Approach 02: /
 //? Top Down
 var climbStairs = function () {
 
