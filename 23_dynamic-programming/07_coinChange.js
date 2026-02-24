@@ -20,7 +20,7 @@
 // Input: coins = [1], amount = 0
 // Output: 0
 
-//? Approach:
+//? Approach 01:
 // Use recursion (fn(remAmount)) to try reducing the amount by picking each coin.
 // Base cases:
 // If remAmount == 0, no coins are needed → return 0.
@@ -59,6 +59,36 @@ var coinChange = function (coins, amount) {
   };
 
   return fn(amount);
+};
+
+//? Time Complexity: O(amount x n)
+//? Space Complexity: O(amount)
+
+//? Approach 02:
+// dp[x] = minimum coins required to make amount x.
+// Initialize dp with Infinity (unreachable state) except dp[0] = 0 (0 coins for amount 0).
+// Transition:
+// For each amount rem from 1 → amount:
+// For each coin c: If rem - c ≥ 0, then:
+// dp[rem] = min(dp[rem], 1 + dp[rem - c])
+// If dp[amount] is still Infinity, return -1 (not possible).
+// Otherwise, return dp[amount]
+
+//? Code:
+var coinChange = function (coins, amount) {
+  const dp = [0];
+
+  for (let i = 1; i <= amount; i = i + 1) {
+    let min = Infinity;
+    for (let j = 0; j < coins.length; j = j + 1) {
+      let curr = dp[i - coins[j]];
+      if (curr >= 0) {
+        min = Math.min(min, curr);
+      }
+    }
+    dp[i] = min === Infinity ? -1 : 1 + min;
+  }
+  return dp[amount];
 };
 
 //? Time Complexity: O(amount x n)
