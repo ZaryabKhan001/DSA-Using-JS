@@ -60,3 +60,41 @@ var maxProduct = function (arr) {
 
 //? Time Complexity: O(n)
 //? Space Complexity: O(1)
+
+//? Approach 02:
+// Initialize Variables
+// ltrProd = 1 → product when traversing left to right.
+// rtlProd = 1 → product when traversing right to left.
+// finalMax = -Infinity → to keep track of the maximum product found.
+// Two-way traversal logic
+// Since the maximum product subarray can break due to negative numbers and zeros, we handle it by multiplying in both directions:
+// LTR (left-to-right): multiply each element into ltrProd.
+// RTL (right-to-left): multiply each element from the back into rtlProd.
+// Update maximum, After each step, check the maximum value among finalMax, ltrProd, and rtlProd.
+// Handle zero reset
+// If at any point the product becomes 0, reset it to 1.
+// This is because any product involving 0 will be 0, but a new subarray can start after zero.
+// After completing the single loop, finalMax will contain the maximum product subarray.
+
+//? Code:
+var maxProduct = function (arr) {
+  let n = arr.length;
+  let ltrProd = 1,
+    rtlProd = 1;
+  let finalMax = -Infinity;
+
+  for (let i = 0; i < n; i++) {
+    ltrProd = ltrProd * arr[i];
+    rtlProd = rtlProd * arr[n - i - 1];
+
+    finalMax = Math.max(finalMax, ltrProd, rtlProd);
+
+    if (ltrProd === 0) ltrProd = 1;
+    if (rtlProd === 0) rtlProd = 1;
+  }
+
+  return finalMax;
+};
+
+//? Time Complexity: O(n)
+//? Space Complexity: O(1)
