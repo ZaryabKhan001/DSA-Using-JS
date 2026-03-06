@@ -22,7 +22,7 @@
 //? Constraints:
 // 1 <= m, n <= 100
 
-//? Approach: DP (top down)
+//? Approach 01: DP (Bottom up)
 // DP Definition: Let dp[i][j] represent the number of unique paths to reach cell (i,j)
 // Bases cases are like this:
 // First row → Only one way (all moves right).
@@ -45,6 +45,40 @@ var uniquePaths = function (m, n) {
   }
 
   return uniquePaths;
+};
+
+//? Time Complexity: O(m * n)
+//? Space Complexity: O(m * n)
+
+//? Approach 02: DP (Top down)
+// DP Definition: Let dp[i][j] represent the number of unique paths to reach cell (i,j)
+// Bases cases are like this:
+// First row → Only one way (all moves right).
+// First column → Only one way (all moves down).
+// Transition: To reach (i,j), you can come from:
+// Above: (i-1, j)
+// Left: (i, j-1)
+// Final result is at bottom-right cell → dp[m-1][n-1].
+
+//? Code:
+var uniquePaths = function (m, n) {
+  const dp = Array.from({ length: m }, () => Array(n).fill(-1));
+
+  const traversal = (x, y) => {
+    //* base case
+    if (x === 0 && y === 0) return 1;
+
+    //* edge case
+    if (x < 0 || y < 0) return 0;
+
+    //* checking from dp
+    if (dp[x][y] !== -1) return dp[x][y];
+
+    //* processing
+    return (dp[x][y] = traversal(x - 1, y) + traversal(x, y - 1));
+  };
+
+  return traversal(m - 1, n - 1);
 };
 
 //? Time Complexity: O(m * n)
