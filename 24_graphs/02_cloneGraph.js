@@ -89,3 +89,40 @@ var cloneGraph = function (root) {
 
 //? Time Complexity: O(V + M) where V is the number of nodes and M is the number of edges in the graph.
 //? Space Complexity: O(V + M) where V is the number of nodes in the graph.
+
+//? Approach 02: DFS
+// If the input node is NULL → return NULL.
+// Use a map to store cloned nodes.
+// Define a recursive DFS function:
+//   If the current node is already cloned → return the clone.
+//   Otherwise, create a clone of the current node and insert it into the map.
+//   For each neighbor:
+//     Recursively call DFS on the neighbor and add it to the cloned node's neighbors.
+// Return the cloned root from the map.
+
+//? Code:
+var cloneGraph = function (root) {
+  if (!root) return null;
+
+  const map = new Map();
+
+  const dfs = (node) => {
+    if (map.has(node)) return map.get(node);
+
+    // create clone of current node
+    const clone = new Node(node.val);
+    map.set(node, clone);
+
+    // recursively clone neighbors
+    for (let neighbor of node.neighbors) {
+      clone.neighbors.push(dfs(neighbor));
+    }
+
+    return clone;
+  };
+
+  return dfs(root);
+};
+
+//? Time Complexity: O(V + M) where V is the number of nodes and M is the number of edges in the graph.
+//? Space Complexity: O(V) for the recursion stack + O(V) for the map → O(V + M) in total.
