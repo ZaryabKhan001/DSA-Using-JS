@@ -32,6 +32,52 @@
 //? Solution: BFS
 //* BFS Iterative
 
+// const getChildrens = (edges) => {
+//   const map = {};
+
+//   for (let i = 0; i < edges.length; i = i + 1) {
+//     const u = edges[i][0];
+//     const v = edges[i][1];
+
+//     if (!map[u]) map[u] = [];
+//     if (!map[v]) map[v] = [];
+
+//     map[u].push(v);
+//     map[v].push(u);
+//   }
+//   return map;
+// };
+
+// var validPath = function (n, edges, source, destination) {
+//   const queue = [source];
+//   const visitedNodes = new Set();
+//   const childrensMap = getChildrens(edges);
+
+//   while (queue.length) {
+//     const curr = queue.shift();
+//     if (curr === destination) return true;
+
+//     visitedNodes.add(curr);
+
+//     const childrens = childrensMap[curr] || [];
+
+//     for (let node of childrens) {
+//       if (!visitedNodes.has(node)) {
+//         visitedNodes.add(node);
+//         queue.push(node);
+//       }
+//     }
+//   }
+//   return false;
+// };
+
+//? Time Complexity: O(n + m) where n is the number of vertices and m is the number of edges
+//? Space Complexity: O(n + m)
+
+//? Solution: DFS
+
+//* DFS Iterative
+
 const getChildrens = (edges) => {
   const map = {};
 
@@ -49,12 +95,12 @@ const getChildrens = (edges) => {
 };
 
 var validPath = function (n, edges, source, destination) {
-  const queue = [source];
+  const stack = [source];
   const visitedNodes = new Set();
   const childrensMap = getChildrens(edges);
 
-  while (queue.length) {
-    const curr = queue.shift();
+  while (stack.length) {
+    const curr = stack.pop();
     if (curr === destination) return true;
 
     visitedNodes.add(curr);
@@ -64,12 +110,9 @@ var validPath = function (n, edges, source, destination) {
     for (let node of childrens) {
       if (!visitedNodes.has(node)) {
         visitedNodes.add(node);
-        queue.push(node);
+        stack.push(node);
       }
     }
   }
   return false;
 };
-
-//? Time Complexity: O(n + m) where n is the number of vertices and m is the number of edges
-//? Space Complexity: O(n + m)
