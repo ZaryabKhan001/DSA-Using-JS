@@ -116,3 +116,6 @@ var validPath = function (n, edges, source, destination) {
   }
   return false;
 };
+
+//? Time Complexity: O(n + m) where n is the number of vertices and m is the number of edges
+//? Space Complexity: O(n + m)
