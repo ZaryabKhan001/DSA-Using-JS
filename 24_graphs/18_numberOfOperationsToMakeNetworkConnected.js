@@ -30,7 +30,7 @@
 // There are no repeated connections.
 // No two computers are connected by more than one cable.
 
-//? Approach: Graphs, DFS
+//? Approach 01: Graphs, DFS
 // To connect all n computers, at least n - 1 connections are required. If not, return -1.
 // Build an undirected graph using the given connections.
 // Use DFS to traverse the graph and count the number of connected components.
@@ -74,3 +74,52 @@ var makeConnected = function (n, connections) {
 
 //? Time Complexity: O(V + E)
 //? Space Complexity: O(V + E)
+
+//? Approach 02: Graphs, Union-Find
+// To connect all n computers, at least n - 1 connections are required. If not, return -1.
+// Initialize a Union-Find data structure to keep track of connected components.
+// For each connection, perform a union operation to connect the two computers.
+// After processing all connections, count the number of unique parents (connected components).
+// If there are k connected components, we need k - 1 extra connections to connect them all.
+// Return noOfComponents - 1.
+
+//? Code:
+var makeConnected = function (n, connections) {
+  if (connections.length < n - 1) return -1;
+
+  const parent = Array.from({ length: n }, (_, id) => id);
+
+  const find = (x) => {
+    if (parent[x] !== x) {
+      parent[x] = find(parent[x]);
+    }
+    return parent[x];
+  };
+
+  const union = (u, v) => {
+    const rootU = find(u);
+    const rootV = find(v);
+
+    if (rootU !== rootV) {
+      parent[rootV] = rootU;
+    }
+  };
+
+  //* connect nodes
+  for (let [u, v] of connections) {
+    union(u, v);
+  }
+
+  //* finding out components
+  let components = 0;
+  for (let i = 0; i < n; i = i + 1) {
+    if (find(i) === i) {
+      components++;
+    }
+  }
+
+  return components - 1;
+};
+
+//? Time Complexity: O(V + E)
+//? Space Complexity: O(V)
