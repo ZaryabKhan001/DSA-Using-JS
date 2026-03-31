@@ -14,3 +14,34 @@
 //? Advantage’s of Trie Data Structure
 // Prefix-based operations: It efficiently supports prefix searches, making it ideal for autocomplete and search suggestion systems.
 // Efficient searching: Trie allows fast search, insertion, and deletion operations in O(L) time, where L is the length of the word.
+
+//? Trie Node Structure
+// Code:
+//             class TrieNode {
+//                 constructor() {
+//                     this.children = {};
+//                     this.isEndOfWord = false;
+//                 }
+//             }
+
+//? Trie Structure
+// Code:
+//             class Trie {
+//                 constructor() {
+//                     this.root = new TrieNode();
+//                 }
+//             }
+
+//? Points to Remember
+// The root node is the starting point of a Trie data structure.
+// Each Trie node has two main properties: children and an end-of-word flag.
+// A Trie requires only a root node, and all words and operations originate from it.
+
+//? Trie Operations
+// Insert, Search, Prefix
+// ant, and, cat, cap, car, card
+
+// Insert:
+// Search:
+// Insert:
+// Delete:
