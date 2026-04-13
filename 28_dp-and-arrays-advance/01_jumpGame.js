@@ -55,3 +55,25 @@ var canJump = function (nums) {
 
 //? Time Complexity = O(n2)
 //? Space Complexity = O(n)
+
+//? Approach 02: Greedy
+// Maintain a variable farthest to track the farthest index reachable so far.
+// Traverse the array from left to right.
+// If the current index i is greater than farthest, it means this position cannot be reached, so return false.
+// Otherwise, update the farthest reachable index using: farthest = Math.max(farthest, i + nums[i]).
+// Continue updating the reachable range while traversing the array.
+// If the loop finishes without getting stuck, it means the last index is reachable.
+
+//? Code:
+var canJump = function (nums) {
+  let farthest = 0;
+
+  for (let i = 0; i < nums.length; i = i + 1) {
+    if (i > farthest) return false;
+    farthest = Math.max(farthest, nums[i] + i);
+  }
+  return true;
+};
+
+//? Time Complexity = O(n)
+//? Space Complexity = O(1)
