@@ -12,7 +12,6 @@
 // Note: The answer is guaranteed to fit within a 32-bit integer.
 
 //? Examples:
-
 // Input: s = "T|T&F^T"
 // Output: 4
 // Explaination: The expression evaluates to true in 4 ways: ((T|T)&(F^T)), (T|(T&(F^T))), (((T|T)&F)^T) and (T|((T&F)^T)).
