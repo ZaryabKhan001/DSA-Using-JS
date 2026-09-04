@@ -40,6 +40,109 @@
 
 //? Thought Process:
 
+// 1. Core idea
+// For every string, try every possible split:
+
+// great
+
+// g | reat
+// gr | eat
+// gre | at
+// grea | t
+
+
+// For each split, there are 2 possibilities.
+// No swap:
+// A | B
+// ↓
+// C | D
+
+// solve(A,C) && solve(B,D)
+
+// Swap:
+// A | B
+// ↓
+// D | C
+
+// solve(A,D) && solve(B,C)
+
+
+// If either works → true.
+
+// 2. Why recursion?
+// After splitting, each smaller part is the same problem.
+
+// For example:
+// great → gr | eat
+
+// Now we need to ask:
+
+// Is "gr" a scramble of "rg"?
+
+// That's the same question again → recursion.
+
+//? 3. Why DP?
+// The same pair can be calculated multiple times.
+
+// So store:
+
+// map.set(s1 + "#" + s2, answer);
+
+// Before calculating:
+
+// if (map.has(key)) {
+//     return map.get(key);
+// }
+
+// So:
+
+// DP state = (s1, s2) → whether s1 is a scramble of s2.
+
+// 4. Important n - i
+
+// If:
+
+// n = 5
+// i = 2
+
+
+// and:
+
+// s2 = rgeat
+//      01234
+
+
+// Then:
+
+// s2.substring(n - i)
+// = s2.substring(3)
+// = "at"
+
+
+// Why?
+
+// Because we need the last i characters.
+
+// rgeat
+//    ^^
+//    at
+
+// So n - i gives the starting index of the last i characters.
+
+// 6. Complexity
+// Time:  O(n⁴)
+// Space: O(n³)
+
+
+//? Reason:
+
+// O(n³) states × O(n) splits = O(n⁴)
+
+// 7. Interview answer to memorize
+
+// "I try every split. For each split, I check both possibilities: no swap and swap. Each smaller part is solved recursively. Since the same subproblems repeat, I memoize (s1, s2) in a Map. This gives O(n⁴) time and O(n³) space."
+
+// That's the main thing you need to remember.
 //? Code:
 var isScramble = function (s1, s2) {
   if (s1.length !== s2.length) {
